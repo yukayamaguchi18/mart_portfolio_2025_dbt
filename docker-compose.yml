@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: dbt
+      POSTGRES_PASSWORD: dbt
+      POSTGRES_DB: dbt_demo
+    ports:
+      - "5432:5432"
+
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.5.1
+    volumes:
+      - .:/usr/app/dbt
+    working_dir: /usr/app/dbt
+    depends_on:
+      - db
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      echo 'Waiting for Postgres to be ready...';
+      until pg_isready -h db -p 5432 -U dbt; do
+        sleep 1;
+      done;
+      echo 'Postgres ready. Running dbt seed...';
+      dbt seed --profiles-dir .;
+      echo 'Running dbt models...';
+      dbt run --profiles-dir .;
+      echo 'All done!';
+      "
