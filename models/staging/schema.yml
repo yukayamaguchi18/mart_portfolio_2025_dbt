@@ -1,0 +1,112 @@
+version: 2
+
+models:
+  - name: stg_customer
+    description: "顧客マスタ（staging）"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_delivery
+    description: "配送先マスタ（staging）"
+    columns:
+      - name: delivery_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+
+  - name: stg_product
+    description: "商品マスタ（staging）"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_campaign
+    description: "キャンペーンマスタ（staging）"
+    columns:
+      - name: campaign_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_ad
+    description: "広告マスタ（staging）"
+    columns:
+      - name: ad_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_subscription
+    description: "定期購入情報（staging）"
+    columns:
+      - name: subscription_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+
+  - name: stg_order_header
+    description: "注文ヘッダ（staging）"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+
+  - name: stg_order_detail
+    description: "注文詳細（staging）"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+
+  - name: stg_shipment_header
+    description: "出荷ヘッダ（staging）"
+    columns:
+      - name: shipment_id
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - not_null
+
+  - name: stg_shipment_detail
+    description: "出荷詳細（staging）"
+    columns:
+      - name: shipment_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+
+  - name: stg_ad_tracking
+    description: "広告トラッキング（staging）"
+    columns:
+      - name: tracking_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+      - name: ad_id
+        tests:
+          - not_null
