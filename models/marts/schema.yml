@@ -1,0 +1,150 @@
+version: 2
+
+models:
+  - name: dm_order_summary
+    description: "注文データを集約したオーダーサマリマート"
+    columns:
+      - name: order_id
+        description: "注文ID"
+      - name: customer_id
+        description: "顧客ID"
+      - name: order_date
+        description: "注文日"
+      - name: order_member_type
+        description: "顧客タイプ"
+      - name: customer_frequency
+        description: "顧客累計注文回数"
+      - name: status
+        description: "注文ステータス"
+      - name: order_category1
+        description: "注文カテゴリ1（Regular含むかTrialのみか）"
+      - name: order_category2
+        description: "注文カテゴリ2（Subscription含むかSpotのみか）"
+      - name: order_product_ids
+        description: "注文商品のIDリスト"
+      - name: order_product_names
+        description: "注文商品の名称リスト"
+      - name: total_amount
+        description: "注文合計金額"
+      - name: total_quantity
+        description: "注文合計数量"
+
+  - name: dm_shipment_summary
+    description: "出荷データを集約した出荷サマリマート"
+    columns:
+      - name: shipment_id
+        description: "出荷ID"
+      - name: order_id
+        description: "注文ID"
+      - name: customer_id
+        description: "顧客ID"
+      - name: shipment_date
+        description: "出荷日"
+      - name: customer_frequency
+        description: "顧客累計出荷回数"
+      - name: status
+        description: "出荷ステータス"
+      - name: shipment_category1
+        description: "出荷カテゴリ1（Regular含むかTrialのみか）"
+      - name: shipment_category2
+        description: "出荷カテゴリ2（Subscription含むかSpotのみか）"
+      - name: shipment_product_ids
+        description: "出荷商品のIDリスト"
+      - name: shipment_product_names
+        description: "出荷商品の名称リスト"
+      - name: total_amount
+        description: "出荷合計金額"
+      - name: total_quantity
+        description: "出荷合計数量"
+
+  - name: dm_customer
+    description: "顧客を集約したカスタマーマート"
+    columns:
+      - name: customer_id
+        description: "顧客ID"
+      - name: age
+        description: "年齢"
+      - name: age_group
+        description: "年代"
+      - name: subscription_count
+        description: "アクティブ定期購入件数"
+      - name: f1_shipment_id
+        description: "F1出荷ID"
+      - name: f2_shipment_id
+        description: "F2出荷ID"
+      - name: f1_tracking_id
+        description: "F1広告トラッキングID"
+      - name: f2_tracking_id
+        description: "F2広告トラッキングID"
+      - name: r
+        description: "最終出荷からの日数"
+      - name: f
+        description: "累計出荷回数"
+      - name: m
+        description: "累計売上"
+      - name: m_this_year
+        description: "今年度売上"
+      - name: m_last_12m
+        description: "直近12か月売上"
+
+  - name: dm_subscription
+    description: "定期購入を集約したマート"
+    columns:
+      - name: subscription_id
+        description: "定期購入ID"
+      - name: customer_id
+        description: "顧客ID"
+      - name: product_id
+        description: "商品ID"
+      - name: contract_date
+        description: "契約日"
+      - name: cancel_date
+        description: "解約日"
+      - name: status
+        description: "ステータス"
+      - name: total_orders
+        description: "累計注文数"
+      - name: total_amount
+        description: "累計金額"
+      - name: last_order_date
+        description: "最終注文日"
+
+  - name: dm_campaign
+    description: "キャンペーン効果マート"
+    columns:
+      - name: campaign_id
+        description: "キャンペーンID"
+      - name: campaign_name
+        description: "キャンペーン名"
+      - name: campaign_category
+        description: "キャンペーンカテゴリ"
+      - name: total_orders
+        description: "注文数"
+      - name: total_customers
+        description: "顧客数"
+      - name: total_amount
+        description: "売上合計"
+      - name: avg_order_amount
+        description: "平均注文金額"
+      - name: subscription_started
+        description: "定期購入開始顧客数"
+
+  - name: dm_ad_effect
+    description: "広告効果マート"
+    columns:
+      - name: ad_id
+        description: "広告ID"
+      - name: ad_name
+        description: "広告名"
+      - name: ad_category
+        description: "広告カテゴリ"
+      - name: impressions
+        description: "表示回数"
+      - name: clicks
+        description: "クリック数"
+      - name: conversions
+        description: "コンバージョン数"
+      - name: total_orders
+        description: "紐づく注文数"
+      - name: total_amount
+        description: "紐づく売上合計"
